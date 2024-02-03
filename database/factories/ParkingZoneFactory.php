@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\ParkingZone;
+use App\Models\Pricing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ParkingZoneFactory extends Factory
 {
+    protected $model = ParkingZone::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +20,8 @@ class ParkingZoneFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'pricing_id' => Pricing::factory()
         ];
     }
 }

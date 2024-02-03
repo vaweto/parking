@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Pricing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PricingFactory extends Factory
 {
+    protected $model = Pricing::class;
+
     /**
      * Define the model's default state.
      *
@@ -17,7 +20,8 @@ class PricingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'cost_in_cents' => 100
         ];
     }
 }

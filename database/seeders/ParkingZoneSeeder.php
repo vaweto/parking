@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ParkingZone;
+use App\Models\Pricing;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,8 +14,10 @@ class ParkingZoneSeeder extends Seeder
      */
     public function run(): void
     {
-        ParkingZone::create(['name' => 'blue zone', 'cost_in_cents' => '100']);
-        ParkingZone::create(['name' => 'white zone', 'cost_in_cents' => '200']);
-        ParkingZone::create(['name' => 'yellow zone', 'cost_in_cents' => '300']);
+        $this->call(PricingSeeder::class);
+
+        ParkingZone::factory()->for(Pricing::inRandomOrder()->first())->create(['name' => 'blue zone']);
+        ParkingZone::factory()->for(Pricing::inRandomOrder()->first())->create(['name' => 'white zone']);
+        ParkingZone::factory()->for(Pricing::inRandomOrder()->first())->create(['name' => 'yellow zone']);
     }
 }
