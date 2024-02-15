@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use App\Observers\VehicleObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[ObservedBy([VehicleObserver::class])]
 class Vehicle extends Model
 {
     use HasFactory;
@@ -19,6 +23,11 @@ class Vehicle extends Model
         'brand',
         'plate_number'
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('user', fn(Builder $builder) => $builder->where('user_id', auth()->id()));
+    }
 
     /**
      * @return BelongsTo

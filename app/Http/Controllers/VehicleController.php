@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreVehicleRequest;
+use App\Http\Requests\Vehicle\StoreVehicleRequest;
 use App\Http\Requests\UpdateVehicleRequest;
+use App\Http\Resources\VehicleResource;
 use App\Models\Vehicle;
+use Illuminate\Http\Response;
 
 class VehicleController extends Controller
 {
@@ -13,7 +15,7 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+        return VehicleResource::collection(Vehicle::query()->paginate(50));
     }
 
     /**
@@ -21,7 +23,9 @@ class VehicleController extends Controller
      */
     public function store(StoreVehicleRequest $request)
     {
-        //
+        $vehicle = Vehicle::create($request->validated());
+
+        return VehicleResource::make($vehicle);
     }
 
     /**
@@ -29,15 +33,17 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        //
+        return VehicleResource::make($vehicle);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateVehicleRequest $request, Vehicle $vehicle)
+    public function update(StoreVehicleRequest $request, Vehicle $vehicle)
     {
-        //
+        $vehicle->update($request->validated());
+
+        return response()->json(VehicleResource::make($vehicle), Response::HTTP_ACCEPTED);
     }
 
     /**
@@ -45,6 +51,8 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->delete();
+
+        return response()->noContent();
     }
 }
