@@ -1,0 +1,580 @@
+openapi: 3.0.3
+info:
+  title: Laravel
+  description: 'An api for parking'
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/auth/register:
+    post:
+      summary: ''
+      operationId: postApiV1AuthRegister
+      description: ''
+      parameters: []
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The password field confirmation does not match. (and 1 more error)'
+                  errors:
+                    password:
+                      - 'The password field confirmation does not match.'
+                      - 'The password field must be at least 8 characters.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The password field confirmation does not match. (and 1 more error)'
+                  errors:
+                    type: object
+                    properties:
+                      password:
+                        type: array
+                        example:
+                          - 'The password field confirmation does not match.'
+                          - 'The password field must be at least 8 characters.'
+                        items:
+                          type: string
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: fimmahaswwkfnkqmld
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 255 characters.'
+                  example: savion.trantow@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: qui
+              required:
+                - name
+                - email
+                - password
+      security: []
+  /api/v1/auth/login:
+    post:
+      summary: ''
+      operationId: postApiV1AuthLogin
+      description: ''
+      parameters: []
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'The provided credentials are incorrect.'
+                  errors:
+                    email:
+                      - 'The provided credentials are incorrect.'
+                properties:
+                  message:
+                    type: string
+                    example: 'The provided credentials are incorrect.'
+                  errors:
+                    type: object
+                    properties:
+                      email:
+                        type: array
+                        example:
+                          - 'The provided credentials are incorrect.'
+                        items:
+                          type: string
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Must be a valid email address.'
+                  example: elisabeth16@example.org
+                password:
+                  type: string
+                  description: ''
+                  example: qui
+              required:
+                - email
+                - password
+      security: []
+  /api/v1/profile:
+    get:
+      summary: ''
+      operationId: getApiV1Profile
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Auth
+      security: []
+    put:
+      summary: ''
+      operationId: putApiV1Profile
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 255 characters.'
+                  example: orpshigsqrscanlw
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 255 characters.'
+                  example: mable74@example.net
+              required:
+                - name
+                - email
+      security: []
+  /api/v1/password:
+    put:
+      summary: ''
+      operationId: putApiV1Password
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                current_password:
+                  type: string
+                  description: ''
+                  example: voluptatem
+                password:
+                  type: string
+                  description: ''
+                  example: sunt
+              required:
+                - current_password
+                - password
+      security: []
+  /api/v1/auth/logout:
+    post:
+      summary: ''
+      operationId: postApiV1AuthLogout
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Auth
+      security: []
+  /api/v1/user:
+    get:
+      summary: ''
+      operationId: getApiV1User
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/tickets:
+    get:
+      summary: ''
+      operationId: getApiV1Tickets
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Tickets
+    post:
+      summary: ''
+      operationId: postApiV1Tickets
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Tickets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                vehicle_id:
+                  type: integer
+                  description: ''
+                  example: 18
+                parking_zone_id:
+                  type: integer
+                  description: ''
+                  example: 16
+                expires_at:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>now</code>.'
+                  example: '2057-06-01'
+              required:
+                - vehicle_id
+                - parking_zone_id
+      security: []
+  '/api/v1/tickets/{ticket_id}':
+    get:
+      summary: ''
+      operationId: getApiV1TicketsTicket_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Tickets
+      security: []
+    put:
+      summary: ''
+      operationId: putApiV1TicketsTicket_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Tickets
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                expires_at:
+                  type: string
+                  description: 'Must be a valid date. Must be a date after <code>expires_at</code>. Must be a date after <code>now</code>.'
+                  example: '2092-03-29'
+      security: []
+    parameters:
+      -
+        in: path
+        name: ticket_id
+        description: 'The ID of the ticket.'
+        example: 15
+        required: true
+        schema:
+          type: integer
+  '/api/v1/tickets/{ticket_id}/stop':
+    put:
+      summary: ''
+      operationId: putApiV1TicketsTicket_idStop
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Tickets
+      security: []
+    parameters:
+      -
+        in: path
+        name: ticket_id
+        description: 'The ID of the ticket.'
+        example: 4
+        required: true
+        schema:
+          type: integer
+  /api/v1/vehicles:
+    get:
+      summary: 'Display a listing of the resource.'
+      operationId: displayAListingOfTheResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Vehicles
+      security: []
+    post:
+      summary: 'Store a newly created resource in storage.'
+      operationId: storeANewlyCreatedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Vehicles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                brand:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: wewysbyqkgh
+                plate_number:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: ouxy
+                vehicle_type_id:
+                  type: string
+                  description: ''
+                  example: ad
+                color:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: yvyt
+              required:
+                - brand
+                - plate_number
+                - vehicle_type_id
+      security: []
+  '/api/v1/vehicles/{id}':
+    get:
+      summary: 'Display the specified resource.'
+      operationId: displayTheSpecifiedResource
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Vehicles
+      security: []
+    put:
+      summary: 'Update the specified resource in storage.'
+      operationId: updateTheSpecifiedResourceInStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Vehicles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                brand:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: sllhxtgd
+                plate_number:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: omecddgvhmaa
+                vehicle_type_id:
+                  type: string
+                  description: ''
+                  example: aut
+                color:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: dm
+              required:
+                - brand
+                - plate_number
+                - vehicle_type_id
+      security: []
+    delete:
+      summary: 'Remove the specified resource from storage.'
+      operationId: removeTheSpecifiedResourceFromStorage
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Vehicles
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the vehicle.'
+        example: 18
+        required: true
+        schema:
+          type: integer
+  /api/v1/parking_zones:
+    get:
+      summary: ''
+      operationId: getApiV1Parking_zones
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Zones
+      security: []
+tags:
+  -
+    name: Auth
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: Tickets
+    description: ''
+  -
+    name: Vehicles
+    description: ''
+  -
+    name: Zones
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.'
+security:
+  -
+    default: []

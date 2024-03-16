@@ -10,6 +10,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @group Auth
+ */
 class LoginController extends Controller
 {
     public function __invoke(LoginRequest $request)

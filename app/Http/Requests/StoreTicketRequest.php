@@ -6,13 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StoreTicketRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,7 +15,9 @@ class StoreTicketRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'vehicle_id' => ['required', 'integer', 'exists:vehicles,id,user_id,'. auth()->id()],
+            'parking_zone_id' => ['required', 'integer', 'exists:parking_zones,id'],
+            'expires_at' => ['date','after:now']
         ];
     }
 }

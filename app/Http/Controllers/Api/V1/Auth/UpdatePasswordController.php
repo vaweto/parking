@@ -7,6 +7,9 @@ use App\Http\Requests\UpdatePasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
+/**
+ * @group Auth
+ */
 class UpdatePasswordController extends Controller
 {
     public function __invoke(UpdatePasswordRequest $request)

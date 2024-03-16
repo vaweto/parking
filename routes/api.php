@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1\Auth;
 use App\Http\Controllers\Api\V1\ParkingZoneController;
+use App\Http\Controllers\Api\V1\TicketController;
 use App\Http\Controllers\Api\V1\VehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     #ParkingZones
     Route::get('/parking_zones', [ParkingZoneController::class, 'index']);
+
+    #Ticket
+    Route::get('/tickets', [TicketController::class, 'index']);
+    Route::get('/tickets/{ticket}', [TicketController::class, 'show']);
+    Route::post('/tickets', [TicketController::class, 'store']);
+    Route::put('/tickets/{ticket}', [TicketController::class, 'update']);
+
+    Route::put('/tickets/{ticket}/stop', [TicketController::class, 'stop']);
 });
 
 

@@ -7,6 +7,9 @@ use App\Http\Resources\ParkingZoneResource;
 use App\Models\ParkingZone;
 use Illuminate\Http\Request;
 
+/**
+ * @group Zones
+ */
 class ParkingZoneController extends Controller
 {
     public function index()
