@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth;
-use App\Http\Controllers\VehicleController;
+use App\Http\Controllers\Api\V1\ParkingZoneController;
+use App\Http\Controllers\Api\V1\VehicleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     #Vehicle
     Route::apiResource('vehicles', VehicleController::class);
+
+    #ParkingZones
+    Route::get('/parking_zones', [ParkingZoneController::class, 'index']);
 });
 
 
